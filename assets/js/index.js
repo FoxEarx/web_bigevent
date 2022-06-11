@@ -11,6 +11,15 @@ function getUserInfo() {
       layer.msg(res.message)
       renderAvatar(res.data)
     },
+    // complete: (res) => {
+    //   if (
+    //     res.responseJSON.status == 1 &&
+    //     res.responseJSON.message == '身份认证失败！'
+    //   ) {
+    //     localStorage.removeItem('token')
+    //     location.href = '/login.html'
+    //   }
+    // },
   })
 }
 const renderAvatar = (user) => {
