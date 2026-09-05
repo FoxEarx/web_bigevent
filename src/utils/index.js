@@ -1,0 +1,50 @@
+// 用于高频事件防抖，例如 resize、输入框联动查询等场景。
+export function debounce(fn, delay) {
+  let timer;
+
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
+}
+
+// 按传入模板格式化时间，兼容 yyyy-MM-dd、HH:mm:ss 等常见展示格式。
+export function formatTime(time, fmt) {
+  if (!time) {
+    return "";
+  }
+
+  const date = new Date(time);
+  const formatMap = {
+    "M+": date.getMonth() + 1,
+    "d+": date.getDate(),
+    "H+": date.getHours(),
+    "m+": date.getMinutes(),
+    "s+": date.getSeconds(),
+    "q+": Math.floor((date.getMonth() + 3) / 3),
+    S: date.getMilliseconds(),
+  };
+
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(
+      RegExp.$1,
+      `${date.getFullYear()}`.substr(4 - RegExp.$1.length)
+    );
+  }
+
+  Object.keys(formatMap).forEach((key) => {
+    if (new RegExp(`(${key})`).test(fmt)) {
+      const value = formatMap[key];
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length === 1
+          ? value
+          : `00${value}`.substr(`${value}`.length)
+      );
+    }
+  });
+
+  return fmt;
+}
