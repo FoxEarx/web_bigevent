@@ -8,9 +8,12 @@ const path = require("path");
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
-
 module.exports = {
-  publicPath: './',
+  // ==========修改这里==========
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/web_bigevent/'
+    : '/',
+  // ===========================
   outputDir: process.env.VUE_APP_outputDir || 'dist',
   assetsDir: 'static',
   filenameHashing: true,
@@ -19,9 +22,8 @@ module.exports = {
   transpileDependencies: [],
   productionSourceMap: false,
   css: {
-    // 是否使用css分离插件 ExtractTextPlugin
-    extract: process.env.NODE_ENV === "production" ? true : false,//是否将组件中的 CSS 提取至一个独立的 CSS 文件中 (而不是动态注入到 JavaScript 中的 inline 代码)。
-    sourceMap: false,//是否为 CSS 开启 source map。设置为 true 之后可能会影响构建的性能。
+    extract: process.env.NODE_ENV === "production" ? true : false,
+    sourceMap: false,
     loaderOptions: {
       sass: {
         prependData: `@import "@/assets/css/variable.scss";`
@@ -29,7 +31,6 @@ module.exports = {
     },
     requireModuleExtension: true,
   },
-
   chainWebpack: (config) => {
     // 配置别名
     config.resolve.alias
@@ -40,21 +41,10 @@ module.exports = {
       .set('views', resolve('src/views'))
       .set('api', resolve('src/api'))
       .set('lib', resolve('src/lib'))
-
     if (process.env.NODE_ENV === "production") {
       // 删除系统默认的splitChunk
       config.optimization.delete("splitChunks");
     }
-    // 删除预加载
-    //  // 移除 prefetch  插件
-    //  config.plugins.delete('prefetch-index')
-    //  // 移除 preload 插件
-    //  config.plugins.delete('preload-index');
-    //   config.optimization.minimizer('terser').tap((args) => {
-    //     // 去除生产环境console
-    //     args[0].terserOptions.compress.drop_console = true
-    //     return args
-    //   })
   },
   configureWebpack: config => {
     // 给输出的js名称添加hash
@@ -74,15 +64,6 @@ module.exports = {
             reuseExistingChunk: true,
             enforce: true
           },
-          // 抽离node_modules下的库为一个chunk
-          // vendors: {
-          //   name: "chunk-vendors",
-          //   test: /[\\/]node_modules[\\/]/,
-          //   chunks: "initial",
-          //   priority: 2,
-          //   reuseExistingChunk: true,
-          //   enforce: true
-          // },
           element: {
             name: "chunk-element-ui",
             test: /[\\/]node_modules[\\/]element-ui[\\/]/,
@@ -111,11 +92,8 @@ module.exports = {
       }
     };
   },
-  // 是否为 Babel 或 TypeScript 使用 thread-loader。该选项在系统的 CPU 有多于一个内核时自动启用，仅作用于生产构建。
   parallel: require('os').cpus().length > 1,
-
   devServer: {
-    // 配置多个代理
   },
   pluginOptions: {
   }
