@@ -8,14 +8,14 @@
 import Echart from "@/components/echart/index.vue";
 
 const fields = [
-  { name: "智能装备关键部件", value: 26, percent: "20.3%" },
-  { name: "智能制造系统", value: 22, percent: "17.2%" },
-  { name: "储能技术", value: 18, percent: "14.1%" },
-  { name: "新能源材料", value: 16, percent: "12.5%" },
-  { name: "工业数字化", value: 14, percent: "10.9%" },
-  { name: "新材料", value: 12, percent: "9.4%" },
-  { name: "绿色低碳", value: 10, percent: "7.8%" },
-  { name: "智能运维", value: 10, percent: "7.8%" },
+  { name: "智能装备关键部件", value: 26, percent: "20.3%", icon: "⚙" },
+  { name: "智能制造系统", value: 22, percent: "17.2%", icon: "▣" },
+  { name: "储能技术", value: 18, percent: "14.1%", icon: "◈" },
+  { name: "新能源材料", value: 16, percent: "12.5%", icon: "♧" },
+  { name: "工业数字化", value: 14, percent: "10.9%", icon: "▤" },
+  { name: "新材料", value: 12, percent: "9.4%", icon: "◆" },
+  { name: "绿色低碳", value: 10, percent: "7.8%", icon: "✦" },
+  { name: "智能运维", value: 10, percent: "7.8%", icon: "◉" },
 ];
 
 export default {
@@ -25,7 +25,7 @@ export default {
     return {
       chartOptions: {
         animationDuration: 900,
-        grid: { left: 116, right: 80, top: 10, bottom: 25 },
+        grid: { left: 124, right: 73, top: 8, bottom: 27 },
         tooltip: {
           trigger: "axis",
           axisPointer: { type: "none" },
@@ -42,10 +42,15 @@ export default {
           min: 0,
           max: 30,
           interval: 10,
-          axisLine: { lineStyle: { color: "rgba(89, 155, 190, .45)" } },
+          axisLine: {
+            lineStyle: { color: "rgba(89, 155, 190, .48)", width: 1 },
+          },
           axisTick: { show: false },
-          axisLabel: { color: "#6f9aae", fontSize: 10 },
-          splitLine: { lineStyle: { color: "rgba(72, 131, 170, .16)" } },
+          axisLabel: { color: "#769cae", fontSize: 9, margin: 7 },
+          splitLine: {
+            show: true,
+            lineStyle: { color: "rgba(72, 131, 170, .18)", width: 1 },
+          },
         },
         yAxis: {
           type: "category",
@@ -55,21 +60,29 @@ export default {
           axisTick: { show: false },
           axisLabel: {
             color: "#b6d6e6",
-            fontSize: 11,
-            margin: 10,
-            formatter: (value) => `{icon|◆} {name|${value}}`,
+            fontSize: 10,
+            margin: 9,
+            formatter: (value) => {
+              const item = fields.find((field) => field.name === value);
+              return `{icon|${item ? item.icon : "◆"}} {name|${value}}`;
+            },
             rich: {
-              icon: { color: "#70dfff", fontSize: 9 },
-              name: { color: "#b6d6e6", fontSize: 11 },
+              icon: {
+                color: "#65d7f5",
+                fontSize: 16,
+                width: 21,
+                align: "center",
+              },
+              name: { color: "#b6d6e6", fontSize: 10 },
             },
           },
         },
         series: [
           {
             type: "bar",
-            barWidth: 8,
+            barWidth: 7,
             showBackground: true,
-            backgroundStyle: { color: "rgba(22, 77, 125, .28)" },
+            backgroundStyle: { color: "rgba(22, 77, 125, .25)" },
             itemStyle: {
               borderRadius: [0, 2, 2, 0],
               color: {

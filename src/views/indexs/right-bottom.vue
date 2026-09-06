@@ -16,6 +16,7 @@ const indicators = [
   { name: "投资价值", max: 100 },
   { name: "可复制性", max: 100 },
   { name: "政策协同性", max: 100 },
+  { name: "落地可行性", max: 100 },
 ];
 
 export default {
@@ -53,8 +54,8 @@ export default {
           data: ["重点成果平均水平", "研究院整体水平"],
         },
         radar: {
-          center: ["38%", "52%"],
-          radius: "68%",
+          center: ["38%", "45%"],
+          radius: "64%",
           shape: "polygon",
           splitNumber: 4,
           indicator: indicators,
@@ -77,7 +78,7 @@ export default {
             data: [
               {
                 name: "重点成果平均水平",
-                value: [86, 78, 82, 72, 84, 76, 68],
+                value: [86, 78, 82, 72, 84, 76, 68, 80],
                 lineStyle: { color: "#26d7f5", width: 1.5 },
                 itemStyle: { color: "#b4f7ff" },
                 areaStyle: {
@@ -90,7 +91,7 @@ export default {
               },
               {
                 name: "研究院整体水平",
-                value: [72, 68, 75, 66, 70, 64, 61],
+                value: [72, 68, 75, 66, 70, 64, 61, 69],
                 lineStyle: { color: "#8275c9", width: 1, type: "dashed" },
                 itemStyle: { color: "#b6a9ee" },
                 areaStyle: {

@@ -78,6 +78,13 @@ export default {
       });
       this.chart = echarts.init(this.$refs.map);
       this.chart.setOption(this.createOption());
+      this.chart.on("click", (params) => {
+        if (!params.data || !params.data.detail) return;
+        this.$Message({
+          type: "info",
+          text: `${params.data.name}：${params.data.detail} ${params.data.metric}项`,
+        });
+      });
     },
     createEdgeParticles(features) {
       const segments = new Map();

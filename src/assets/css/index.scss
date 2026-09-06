@@ -3,6 +3,45 @@
 @import './theme/index.css';
 @import '../iconfont//iconfont.css';
 
+// 全局滚动条：与驾驶舱的深蓝青色视觉保持一致。
+html {
+  scrollbar-color: #1675ad rgba(4, 25, 55, 0.72);
+  scrollbar-width: thin;
+}
+
+*,
+*::before,
+*::after {
+  scrollbar-color: #1675ad rgba(4, 25, 55, 0.72);
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  border: 1px solid rgba(34, 126, 177, 0.18);
+  background: rgba(4, 25, 55, 0.72);
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 1px solid rgba(91, 224, 255, 0.55);
+  border-radius: 5px;
+  background: linear-gradient(180deg, #42d5f4 0%, #126da5 100%);
+  box-shadow: 0 0 6px rgba(28, 190, 243, 0.55);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #80ecff 0%, #1688c4 100%);
+  box-shadow: 0 0 9px rgba(42, 208, 255, 0.8);
+}
+
+*::-webkit-scrollbar-corner {
+  background: rgba(4, 25, 55, 0.72);
+}
+
 [class*=" blq-icon-"],
 [class^=blq-icon-] {
   font-family: iconfont !important;

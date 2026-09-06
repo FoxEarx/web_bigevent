@@ -1,17 +1,17 @@
 <template>
   <div class="center-top-metrics">
     <div v-for="item in metrics" :key="item.label" class="metric-box">
-      <div class="metric-icon">{{ item.icon }}</div>
-      <div class="metric-copy">
+      <div class="metric-head">
+        <div class="metric-icon">{{ item.icon }}</div>
         <span>{{ item.label }}</span>
-        <strong
-          >{{ item.value }}<small>{{ item.unit }}</small></strong
-        >
-        <em
-          >环比 <b>{{ item.month }}</b
-          >　同比 <b>{{ item.year }}</b></em
-        >
       </div>
+      <strong class="metric-value"
+        >{{ item.value }}<small>{{ item.unit }}</small></strong
+      >
+      <em class="metric-trend"
+        >环比 <b>{{ item.month }}</b
+        >　同比 <b>{{ item.year }}</b></em
+      >
     </div>
   </div>
 </template>
@@ -89,10 +89,14 @@ export default {
 .metric-box {
   position: relative;
   display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   min-width: 0;
   overflow: hidden;
-  padding: 10px 8px;
+  padding: 9px 7px 7px;
+  box-sizing: border-box;
   background-image: url("../../assets//img/center-top.png");
   background-size: 100% 100%;
   //   box-sizing: border-box;
@@ -118,57 +122,59 @@ export default {
   content: "";
 }
 
+.metric-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  gap: 5px;
+}
+
 .metric-icon {
-  flex: 0 0 21px;
+  flex: 0 0 19px;
   color: #44dfff;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
   text-align: center;
   text-shadow: 0 0 8px rgba(0, 210, 255, 0.72);
 }
 
-.metric-copy {
-  min-width: 0;
-  margin-left: 5px;
-}
-
-.metric-copy span,
-.metric-copy strong,
-.metric-copy em {
-  display: block;
+.metric-head span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.metric-copy span {
   color: #a9d2e4;
   font-size: 10px;
   line-height: 16px;
 }
 
-.metric-copy strong {
+.metric-value {
+  display: block;
   color: #9cecff;
-  font-size: 25px;
-  line-height: 29px;
+  font-size: 24px;
+  line-height: 30px;
   text-shadow: 0 0 9px rgba(54, 210, 255, 0.55);
 }
 
-.metric-copy small {
+.metric-value small {
   margin-left: 3px;
   color: #a6cbd8;
   font-size: 9px;
   font-weight: 400;
 }
 
-.metric-copy em {
+.metric-trend {
+  display: block;
+  overflow: hidden;
   color: #6f9daf;
   font-size: 9px;
   font-style: normal;
   line-height: 15px;
+  white-space: nowrap;
 }
 
-.metric-copy b {
+.metric-trend b {
   color: #56d8be;
   font-weight: 400;
 }

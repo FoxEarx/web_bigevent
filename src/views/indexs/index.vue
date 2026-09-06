@@ -1,37 +1,43 @@
 <template>
   <div class="contents">
-    <div class="top-layout">
-      <div class="content-left">
-        <div class="pagetab"></div>
-        <ItemWrap class="content-item" title="成果结构分析">
-          <LeftTop />
-        </ItemWrap>
-        <ItemWrap class="content-item" title="重点技术领域分析">
-          <LeftCenter />
-        </ItemWrap>
-      </div>
+    <div style="flex: 1">
+      <div class="top-layout">
+        <div class="content-left">
+          <div class="pagetab"></div>
+          <ItemWrap class="content-item left-top-item" title="成果结构分析">
+            <LeftTop />
+          </ItemWrap>
+          <ItemWrap
+            class="content-item left-center-item"
+            title="重点技术领域分析"
+          >
+            <LeftCenter />
+          </ItemWrap>
+        </div>
 
-      <div class="content-center">
-        <CenterTop class="center-top" />
-        <CenterMap class="center-map" />
+        <div class="content-center">
+          <CenterTop class="center-top" />
+          <CenterMap class="center-map" />
+        </div>
       </div>
-
-      <div class="content-right">
-        <ItemWrap class="content-item" title="成果转换阶段分析">
-          <RightTop />
+      <div class="bottom-layout">
+        <ItemWrap class="bottom-trend" title="月度转换趋势分析">
+          <LeftBottom />
         </ItemWrap>
-        <ItemWrap class="content-item" title="重点项目推进榜">
-          <RightCenter />
+        <ItemWrap class="bottom-install" title="转换效益监测">
+          <CenterBottom />
         </ItemWrap>
       </div>
     </div>
-
-    <div class="bottom-layout">
-      <ItemWrap class="bottom-trend" title="月度转换趋势分析">
-        <LeftBottom />
+    <div class="content-right">
+      <ItemWrap class="right-top-item" title="成果转换阶段分析">
+        <RightTop />
       </ItemWrap>
-      <ItemWrap class="bottom-install" title="转换效益监测">
-        <CenterBottom />
+      <ItemWrap class="right-center-item" title="重点项目推进榜">
+        <RightCenter />
+      </ItemWrap>
+      <ItemWrap class="right-warning-item" title="项目堵点预警">
+        <RightCenter2 />
       </ItemWrap>
       <ItemWrap class="bottom-statistics" title="成果综合评价">
         <RightBottom />
@@ -49,6 +55,7 @@ import CenterMap from "./center-map.vue";
 import CenterBottom from "./center-bottom.vue";
 import RightTop from "./right-top.vue";
 import RightCenter from "./right-center.vue";
+import RightCenter2 from "./right-center2.vue";
 import RightBottom from "./right-bottom.vue";
 
 export default {
@@ -61,6 +68,7 @@ export default {
     CenterBottom,
     RightTop,
     RightCenter,
+    RightCenter2,
     RightBottom,
   },
 };
@@ -69,8 +77,6 @@ export default {
 <style lang="scss" scoped>
 .contents {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 12px;
   width: 100%;
   box-sizing: border-box;
@@ -92,7 +98,7 @@ export default {
 .bottom-layout {
   align-items: stretch;
   gap: 12px;
-  height: 315px;
+  height: 300px;
 }
 
 .content-left,
@@ -111,8 +117,24 @@ export default {
 }
 
 .content-item {
-  height: 322px;
   min-height: 0;
+}
+
+.left-top-item,
+.left-center-item {
+  height: 330px;
+}
+
+.right-top-item {
+  height: 290px;
+}
+
+.right-center-item {
+  height: 215px;
+}
+
+.right-warning-item {
+  height: 185px;
 }
 
 .center-map {
@@ -132,9 +154,7 @@ export default {
 }
 
 .bottom-statistics {
-  flex: 0 0 450px;
-  width: 450px;
-  min-width: 0;
+  height: 268px;
 }
 
 @keyframes rotating {

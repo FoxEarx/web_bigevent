@@ -2,19 +2,13 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import {
-  loading,
-  borderBox13,
-  digitalFlop,
-  capsuleChart,
-  borderBox8,
-} from "@jiaminghi/data-view";
-import { Radio, Button, RadioGroup } from "element-ui";
+import ElementUI from "element-ui";
 import Echart from "./components/echart/index.vue";
 import ItemWrap from "./components/item-wrap/item-wrap.vue";
 import Message from "./components/message/message.vue";
 import Reacquire from "./components/reacquire/reacquire.vue";
 import Messages from "./components/message/message";
+import "element-ui/lib/theme-chalk/index.css";
 import "vue-easytable/libs/theme-default/index.css";
 import "@/assets/css/public.scss";
 import "@/assets/css/index.scss";
@@ -33,18 +27,12 @@ Vue.config.productionTip = false;
   ["Reacquire", Reacquire],
 ].forEach(([name, component]) => Vue.component(name, component));
 
-// 统一注册项目实际用到的第三方组件，避免在页面里重复 use。
-[Radio, Button, RadioGroup].forEach((component) => Vue.use(component));
-[loading, borderBox13, borderBox8, digitalFlop, capsuleChart].forEach(
-  (component) => Vue.use(component)
-);
-
 // 全局过滤器集中挂载，保持模板层调用方式一致。
 Object.entries(filters).forEach(([name, filter]) => Vue.filter(name, filter));
 
 // 自定义消息方法挂到 Vue 原型，组件内部直接 this.$Message 调用。
 Vue.prototype.$Message = Messages;
-
+Vue.use(ElementUI);
 new Vue({
   router,
   store,
